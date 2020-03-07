@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".steps.MainActivity">
+    
+      <RelativeLayout
+        android:id="@+id/sigin_rl"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:layout_below="@+id/red_bg"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="20dp"
+        >
+
+        <TextView
+            android:id="@+id/tev_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:text="签到"
+            android:textColor="#FF101620"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/tev_signin"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:text="(会员翻倍)"
+            android:textColor="#FF101620"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_marginTop="-6dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="86dp"
+            android:id="@+id/tev_notif1"
+            android:paddingBottom="3dp"
+            android:layout_width="99dp"
+            android:layout_height="19dp"
+            android:layout_below="@+id/tev_signin"
+            android:background="@mipmap/ic_notif_l"
+            android:gravity="center"
+            android:text="连续签到积分翻倍"
+            android:textColor="@android:color/white"
+            android:textSize="10dp" />
+        <TextView
+            android:visibility="gone"
+            android:layout_marginTop="-6dp"
+            android:id="@+id/tev_notif"
+            android:paddingBottom="3dp"
+            android:layout_width="99dp"
+            android:layout_height="19dp"
+            android:layout_below="@+id/tev_signin"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            android:background="@mipmap/ic_notif_r"
+            android:gravity="center"
+            android:text="连续签到有惊喜哦"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
+
+          <com.mhy.view.steps.StepsView
+            android:id="@+id/step_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tev_signin"
+            android:layout_marginTop="16dp" />
+
+    </RelativeLayout>
+
+    <com.mhy.view.CustomView
+        android:visibility="gone"
+        app:customColor="@color/black"
+        app:customText="xml里设置自定义属性"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.mhy.view.polygon.PolygonView
+        android:id="@+id/pv_polygon_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:areaColor="@android:color/holo_blue_light"
+        app:edgeColor="@android:color/black"
+        app:edgeCount="6"
+        app:loopCount="4"
+        app:textColor="@android:color/black" />
+</LinearLayout>

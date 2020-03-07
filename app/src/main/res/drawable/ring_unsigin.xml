@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="4dp"
+    android:innerRadiusRatio="2"
+    android:shape="ring"
+    android:thickness="4dp"
+    android:thicknessRatio="2.5"
+    android:useLevel="false">
+    <solid android:color="#FFF0F094" />
+
+</shape>
+    <!--<shape-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:shape="oval"-->
+    <!--android:useLevel="false" >-->
+    <!--<solid android:color="#FFCCCCCC" />-->
+    <!--&lt;!&ndash;<padding&ndash;&gt;-->
+    <!--&lt;!&ndash;android:left="2dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:top="1dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:right="2dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:bottom="1dp" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<solid&ndash;&gt;-->
+    <!--&lt;!&ndash;android:color="#FFCCCCCC" />&ndash;&gt;-->
+    <!--<stroke-->
+    <!--android:width="@dimen/dp_2_5"-->
+    <!--android:color="@android:color/white" />-->
+    <!--<size android:width="@dimen/dp_10"-->
+    <!--android:height="@dimen/dp_10" />-->
+    <!--</shape>-->
