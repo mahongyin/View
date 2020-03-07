@@ -89,13 +89,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.mhy.view.polygon.PolygonView
-        android:id="@+id/pv_polygon_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:areaColor="@android:color/holo_blue_light"
-        app:edgeColor="@android:color/black"
-        app:edgeCount="6"
-        app:loopCount="4"
-        app:textColor="@android:color/black" />
+
 </LinearLayout>
