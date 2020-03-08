@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="def_sign">
+    <item name="sign_in_bg_color">#000</item>
+    <item name="sign_in_pb_color">@android:color/holo_orange_dark</item>\
+    <item name="sign_in_check_color">@android:color/white</item>
+    <item name="sign_in_text_color">@android:color/holo_purple</item>
+    <item name="sign_in_text_siz">12sp</item>
+    </style>
+</resources>

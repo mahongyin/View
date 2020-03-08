@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Signin">
+        <attr name="sign_in_bg_color" format="color"/>
+        <attr name="sign_in_pb_color" format="color"/>
+        <attr name="sign_in_check_color" format="color"/>
+        <attr name="sign_in_text_color" format="color"/>
+        <attr name="sign_in_text_siz" format="dimension"/>
+    </declare-styleable>
+</resources>

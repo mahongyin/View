@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mhy.view.R;
+import com.mhy.view.utils.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
     int day = -1;//今天在一周的角标
 
     String[] week = {"一", "二", "三", "四", "五", "六", "日"};
-    int toDayNum = 0;//今天签到之后显示的积分  //VIP 1.2倍 SVIP 2倍
     int showNum = 5;////VIP 1.2倍 SVIP 2倍  ADD 根据身份 区分
 
     @Override
@@ -47,18 +47,6 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
         initView();
     }
 
-    /**
-     * 签到后更新数据 签到增加积分
-     *
-     * @param signinlist 签到后更新的数据
-     * @param iDouNum    签到后增加的积分
-     */
-    public void addSiginData(List<Integer> signinlist, int iDouNum) {
-        //个人总积分 增加积分数
-        toDayNum = iDouNum;//今签到获取的积分显示
-        Log.e("签到获取的积分", toDayNum + "");
-        this.signinlist = signinlist;
-    }
 
     /**
      * 周四和周日显示提示
@@ -108,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
      */
     public void setView(int showNum) {
         //今天是一周第几天的角标  // 周二->postion=1
-        day = postionToWeek(getdateForm()) - 1;
+        day = DateUtil.postionToWeek(DateUtil.getdateForm()) - 1;
         Log.e("周几角标", day + "");
         String upText;
         //清空数据
@@ -202,42 +190,6 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
                 Toast.makeText(MainActivity.this, "记得明天来签到哦", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    /**
-     * //今天日期
-     *
-     * @return //2019-1-1
-     */
-    public static String getdateForm() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = new Date();
-        return sdf.format(d);
-    }
-
-    /**
-     * //获取1-7  今天是一周第几天 得到1-7
-     *
-     * @param datetime 2019-10-13
-     * @return 周一 1 周日 7
-     */
-    public static int postionToWeek(String datetime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //0-6
-        Calendar cal = Calendar.getInstance();
-        Date date;
-        try {
-            date = sdf.parse(datetime);
-            cal.setTime(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        // 日0 123456
-        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (w == 0) {
-            w = 7;
-        }
-        return w;
     }
 
 }

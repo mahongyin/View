@@ -2,6 +2,7 @@ package com.mhy.view.steps;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -25,38 +26,13 @@ import com.mhy.view.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mhy.view.utils.DensityUtil;
+
 /**
  * 签到打卡View
  */
 public class StepsView extends View {
-    /**
-     * 将sp值转换为px值，保证文字大小不变
-     */
-    public static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
-    //dp转px
-    public static int dp2px(Context context, float dp) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        //当前屏幕密度因子
-        return (int) (dp * scale + 0.5f);
-    }
-    //Bitmap --> Drawable
-    public static Drawable bitmap2Drawable(Context context, Bitmap bitmap) {
-        return new BitmapDrawable(context.getResources(), bitmap);
-    }
-    public static float density(Context context) {
-//        dpi/160的结果
-        //当前屏幕密度
-        return (float) context.getResources().getDisplayMetrics().density;
-    }
-    public static int dpi(Context context) {
-        //当前屏幕密度
-        return (int) context.getResources().getDisplayMetrics().densityDpi;
-    }
 
-/******************上面是工具包的****************************/
     /**
      * 动画执行的时间 230毫秒
      */
@@ -69,24 +45,24 @@ public class StepsView extends View {
     /**
      * 线段的高度
      */
-    private float mCompletedLineHeight = dp2px(getContext(), 2f);
+    private float mCompletedLineHeight = DensityUtil.dp2px(getContext(), 2f);
 
     /**
      * 图标宽度
      */
-    private float mIconWidth = dp2px(getContext(), 17f);
+    private float mIconWidth = DensityUtil.dp2px(getContext(), 17f);
     /**
      * 图标的高度
      */
-    private float mIconHeight = dp2px(getContext(), 32f);
+    private float mIconHeight = DensityUtil.dp2px(getContext(), 32f);
     /**
      * UP宽度
      */
-    private float mUpWidth = dp2px(getContext(), 32f);
+    private float mUpWidth = DensityUtil.dp2px(getContext(), 32f);
     /**
      * up的高度
      */
-    private float mUpHeight = dp2px(getContext(), 24f);
+    private float mUpHeight = DensityUtil.dp2px(getContext(), 24f);
 
     /**
      * 线段长度
@@ -188,12 +164,12 @@ public class StepsView extends View {
     /**
      * 周几天数颜色
      */
-    private int mUnCompletedDayTextColor = ContextCompat.getColor(getContext(), R.color.c_FFBFC2CC);
+    private int mUnCompletedDayTextColor = ContextCompat.getColor(getContext(), R.color.cp_color_gray_dark);
 
     /**
      * 是否执行动画
      */
-    private boolean isAnimation = false;
+    private boolean isAnimation = false;//false
 
     /**
      * 记录重绘次数
@@ -223,6 +199,18 @@ public class StepsView extends View {
 
     public StepsView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.StepsView);
+        //周几文字颜色
+        mUnCompletedDayTextColor = array.getColor(R.styleable.StepsView_downColor, 0xff000000);
+        mTodoCompletedTextColor = array.getColor(R.styleable.StepsView_todoCompletedTextColor, ContextCompat.getColor(getContext(), R.color.c_d5a872));
+//是否显示动画
+        isAnimation = array.getBoolean(R.styleable.StepsView_isAnimation, false);
+        mLostTextColor = array.getColor(R.styleable.StepsView_lostTextColor, ContextCompat.getColor(getContext(), R.color.c_FE4E45));
+        mCompletedTextColor = array.getColor(R.styleable.StepsView_completedTextColor, ContextCompat.getColor(getContext(), R.color.white));
+        array.recycle();
+
+
         init2();//计算屏幕宽度 适配
         init();
     }
@@ -264,7 +252,7 @@ public class StepsView extends View {
 //}else if (dpi(getContext())>430&&dpi(getContext())<455){
 //    mLineWidth=dp2px(getContext(),32f);
 //}
-        mLineWidth = dp2px(getContext(), (displayMetricsWidth / density(getContext()) - 200) / 6);
+        mLineWidth = DensityUtil.dp2px(getContext(), (displayMetricsWidth / DensityUtil.density(getContext()) - 200) / 6);
         //    //获取屏幕宽高
 //        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 //        int width = manager.getDefaultDisplay().getWidth();
@@ -317,7 +305,7 @@ public class StepsView extends View {
         mTextUnNumberPaint.setStyle(Paint.Style.FILL);
         //从x轴居中
         mTextUnNumberPaint.setTextAlign(Paint.Align.CENTER);
-        mTextUnNumberPaint.setTextSize(sp2px(getContext(), 12f));
+        mTextUnNumberPaint.setTextSize(DensityUtil.sp2px(getContext(), 12f));
 
         // up 已完成text paint  上  白色
         mTextNumberPaint = new Paint();
@@ -326,7 +314,7 @@ public class StepsView extends View {
         mTextNumberPaint.setStyle(Paint.Style.FILL);
         //从x轴居中
         mTextNumberPaint.setTextAlign(Paint.Align.CENTER);
-        mTextNumberPaint.setTextSize(sp2px(getContext(), 12f));
+        mTextNumberPaint.setTextSize(DensityUtil.sp2px(getContext(), 12f));
 
         //up待签  text paint  上 黄色
         mTextTodoNumberPaint = new Paint();
@@ -335,14 +323,14 @@ public class StepsView extends View {
         mTextTodoNumberPaint.setStyle(Paint.Style.FILL);
         //从x轴居中
         mTextTodoNumberPaint.setTextAlign(Paint.Align.CENTER);
-        mTextTodoNumberPaint.setTextSize(sp2px(getContext(), 12f));
+        mTextTodoNumberPaint.setTextSize(DensityUtil.sp2px(getContext(), 12f));
 
         //周week text paint 下
         mTextDayPaint = new Paint();
         mTextDayPaint.setAntiAlias(true);
         mTextDayPaint.setColor(mUnCompletedDayTextColor);
         mTextDayPaint.setStyle(Paint.Style.FILL);
-        mTextDayPaint.setTextSize(sp2px(getContext(), 12f));
+        mTextDayPaint.setTextSize(DensityUtil.sp2px(getContext(), 12f));
 
         //已经完成的icon
         mCompleteIcon = ContextCompat.getDrawable(getContext(), R.drawable.ring_sigin);
@@ -355,10 +343,10 @@ public class StepsView extends View {
         //待签 和 补签  黄
         mLostUpIcon = ContextCompat.getDrawable(getContext(), R.drawable.shape_aval_yellow);
         //最会一天
-        mUpIcon7 =bitmap2Drawable(getContext(),
+        mUpIcon7 =DensityUtil.bitmap2Drawable(getContext(),
                 imageScale(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_gift),
-                        dp2px(getContext(), 25f),
-                        dp2px(getContext(), 24f)));
+                        DensityUtil.dp2px(getContext(), 25f),
+                        DensityUtil.dp2px(getContext(), 24f)));
         //画图bitmap画笔
         mBitmapPaint = new Paint();
         mBitmapPaint.setAntiAlias(true);
@@ -383,7 +371,7 @@ public class StepsView extends View {
 
     private void setChange() {
         //图标的中中心Y点
-        mCenterY = dp2px(getContext(), 32f) + mIconHeight / 2;
+        mCenterY = DensityUtil.dp2px(getContext(), 32f) + mIconHeight / 2;
         //获取左上方Y的位置，获取该点的意义是为了方便画矩形左上的Y位置
         mLeftY = mCenterY - (mCompletedLineHeight / 2);
         //获取右下方Y的位置，获取该点的意义是为了方便画矩形右下的Y位置
@@ -392,7 +380,7 @@ public class StepsView extends View {
         //计算图标中心点
         mCircleCenterPointPositionList.clear();
         //第一个点距离父控件左边14.5dp
-        float size = mIconWidth / 2 + dp2px(getContext(), 23f);
+        float size = mIconWidth / 2 + DensityUtil.dp2px(getContext(), 23f);
         mCircleCenterPointPositionList.add(size);
 
         for (int i = 1; i < mStepNum; i++) {
@@ -521,9 +509,9 @@ public class StepsView extends View {
                     //已签 红背景 白+5  //今未签 红背景 白字签到
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mUpIcon.setBounds(rectUp);
                     mUpIcon.draw(canvas);
                 } else if (stepsBean.getState() == 0 || stepsBean.getState() == 2) {
@@ -532,11 +520,11 @@ public class StepsView extends View {
                             /*左*/
                             (int) (currentComplectedXPosition - mUpWidth / 2),
                             /*上*/
-                            (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                            (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                             /*右*/
                             (int) (currentComplectedXPosition + mUpWidth / 2),
                             /*下*/
-                            (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                            (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
 
                     mLostUpIcon.setBounds(rectUp);
                     mLostUpIcon.draw(canvas);
@@ -550,7 +538,7 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextNumberPaint);
                 } else if (stepsBean.getState() == 0) {
                     //未签到 补签 红色字
@@ -558,7 +546,7 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextUnNumberPaint);
                 } else if (stepsBean.getState() == 2) {
 //                    待签 黄色字
@@ -566,7 +554,7 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextTodoNumberPaint);
                 }
             } else {
@@ -602,9 +590,9 @@ public class StepsView extends View {
                     //已签 红背景 白+5  //今未签 红背景 白字签到
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mUpIcon.setBounds(rectUp);
                     mUpIcon.draw(canvas);
 
@@ -613,15 +601,15 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextNumberPaint);
                 } else {
                     //最后一天bitmap
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mUpIcon7.setBounds(rectUp);
                     //大小
                     mUpIcon7.draw(canvas);
@@ -629,8 +617,8 @@ public class StepsView extends View {
             }
             //周几天数文字
             canvas.drawText(stepsBean.getDay(),
-                    currentComplectedXPosition - dp2px(getContext(), 12f),
-                    mCenterY + dp2px(getContext(), 30f),
+                    currentComplectedXPosition - DensityUtil.dp2px(getContext(), 12f),
+                    mCenterY + DensityUtil.dp2px(getContext(), 30f),
                     mTextDayPaint);
         }
 
@@ -710,18 +698,18 @@ public class StepsView extends View {
                     //已签 红背景 +5  //今 未签 红 签到
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mUpIcon.setBounds(rectUp);
                     mUpIcon.draw(canvas);
                 } else if (stepsBean.getState() == 0 || stepsBean.getState() == 2) {
                     //黄背景 未签补签、+5 //后边待签
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mLostUpIcon.setBounds(rectUp);
                     mLostUpIcon.draw(canvas);
                 }
@@ -734,7 +722,7 @@ public class StepsView extends View {
                             currentComplectedXPosition,
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextNumberPaint);
                 } else if (stepsBean.getState() == 0) {
                     //未签到 补签 红色字
@@ -742,7 +730,7 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextUnNumberPaint);
                 } else if (stepsBean.getState() == 2) {
 //                    待签 黄色字
@@ -750,7 +738,7 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextTodoNumberPaint);
                 }
             } else {
@@ -785,9 +773,9 @@ public class StepsView extends View {
                     //已签 红背景 白+5  //今未签 红背景 白字签到
                     Rect rectUp =
                             new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                     (int) (currentComplectedXPosition + mUpWidth / 2),
-                                    (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                    (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                     mUpIcon.setBounds(rectUp);
                     mUpIcon.draw(canvas);
 
@@ -796,23 +784,23 @@ public class StepsView extends View {
 //                            currentComplectedXPosition - dp2px(getContext(), 8f),
                             currentComplectedXPosition,
 //                            mCenterY / 2 - dp2px(getContext(), 0.5f),
-                            mCenterY - mIconHeight / 2 - dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
+                            mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 4f) - mUpHeight / 2 + Math.abs(mTextNumberPaint.ascent() + mTextNumberPaint.descent()) / 2,
                             mTextNumberPaint);
                 } else {
                 //最后一bitmap
                 Rect rectUp =
                         new Rect((int) (currentComplectedXPosition - mUpWidth / 2),
-                                (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight),
+                                (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight),
                                 (int) (currentComplectedXPosition + mUpWidth / 2),
-                                (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f)));
+                                (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f)));
                 mUpIcon7.setBounds(rectUp);
                 mUpIcon7.draw(canvas);
             }
             }
             //周几天数文字
             canvas.drawText(stepsBean.getDay(),
-                    currentComplectedXPosition - dp2px(getContext(), 12f),
-                    mCenterY + dp2px(getContext(), 30f),
+                    currentComplectedXPosition - DensityUtil.dp2px(getContext(), 12f),
+                    mCenterY + DensityUtil.dp2px(getContext(), 30f),
                     mTextDayPaint);
         }
     }
@@ -860,14 +848,14 @@ public class StepsView extends View {
         for (int i = 0; i < mCircleCenterPointPositionList.size(); i++) {
             float currentComplectedXPosition = mCircleCenterPointPositionList.get(i);
             x1 = (int) (currentComplectedXPosition - mUpWidth / 2);//左
-            y1 = (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 8f) - mUpHeight);//上
+            y1 = (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 8f) - mUpHeight);//上
             x2 = (int) (currentComplectedXPosition + mUpWidth / 2);//右
-            y2 = (int) (mCenterY - mIconHeight / 2 - dp2px(getContext(), 1f));//下
+            y2 = (int) (mCenterY - mIconHeight / 2 - DensityUtil.dp2px(getContext(), 1f));//下
             if (x < x2 && x > x1 && y < y2 && y > y1) {
 //                Log.e("点击view锁定范围" + i);
                 if (mViewClick != null) {
-                    Log.e("像素" , mLineWidth + "," + dpi(getContext()) + "屏幕大小" + displayMetricsWidth + "," + displayMetricsHeight + "scaleX系数" + scaleX);
-                    Log.e("dpi" , dpi(getContext()) + "%" + density(getContext()));
+                    Log.e("像素" , mLineWidth + "," + DensityUtil.dpi(getContext()) + "屏幕大小" + displayMetricsWidth + "," + displayMetricsHeight + "scaleX系数" + scaleX);
+                    Log.e("dpi" , DensityUtil.dpi(getContext()) + "%" + DensityUtil.density(getContext()));
                     mViewClick.onViewClick(i);
                 }
             }

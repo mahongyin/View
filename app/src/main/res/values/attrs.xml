@@ -13,4 +13,71 @@
         <attr name="loopCount" format="integer" />
         <attr name="edgeCount" format="integer" />
     </declare-styleable>
+
+
+        <declare-styleable name="HeartView">
+            <!--心电线的宽度-->
+            <attr name="heart_line_border" format="dimension" />
+            <!--每个表格的行数（就是小格子数）-->
+            <attr name="heart_grid_row" format="integer" />
+            <!--大表格的边框的宽度-->
+            <attr name="heart_grid_border" format="dimension" />
+            <!--每个小格子的宽高-->
+            <attr name="heart_grid_row_height" format="dimension" />
+            <!--每个小格子的线的宽度-->
+            <attr name="heart_grid_line_border" format="dimension" />
+            <!--基准线-->
+            <attr name="heart_base_line" format="integer" />
+            <!--最大值-->
+            <attr name="heart_max" format="integer" />
+            <!--最小值-->
+            <attr name="heart_min" format="integer" />
+            <!--数据采集频率-->
+            <attr name="heart_hz" format="integer" />
+            <!--一个控件，可以显示的心率的时长-->
+            <attr name="heart_show_seconds" format="float" />
+            <!--心率线条的颜色-->
+            <attr name="heart_color" format="color" />
+            <!--表格线条的颜色-->
+            <attr name="heart_grid_line_color" format="color" />
+            <!--表格边框的颜色-->
+            <attr name="heart_grid_border_color" format="color" />
+            <!--控制播放速度的调整 值越小，播放速度越慢 -->
+            <attr name="heart_speed" format="float" />
+        </declare-styleable>
+
+    <declare-styleable name="ContextTitle">
+        <attr name="leftTextVisible" format="boolean"/>
+        <attr name="leftText" format="string"/>
+        <attr name="leftTextSize" format="integer"/>
+        <attr name="leftTextColor" format="color"/>
+
+        <attr name="leftImg" format="reference"/>
+        <attr name="leftImgVisible" format="boolean"/>
+
+        <attr name="titleText" format="string"/>
+        <attr name="titleTextSize" format="integer"/>
+        <attr name="titleTextColor" format="color"/>
+        <attr name="titleVisible" format="boolean"/>
+        <attr name="titleRightImg" format="reference"/>
+
+        <attr name="rightImg" format="reference"/>
+        <attr name="rightImgVisible" format="boolean"/>
+
+        <attr name="rightTextVisible" format="boolean"/>
+        <attr name="rightText" format="string"/>
+        <attr name="rightTextSize" format="integer"/>
+        <attr name="rightTextColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="StepsView">
+
+        <attr name="isAnimation" format="boolean"/>
+        <attr name="lostTextColor" format="color"/>
+        <attr name="completedTextColor" format="color"/>
+        <attr name="downColor" format="color"/>
+        <attr name="todoCompletedTextColor" format="color"/>
+
+    </declare-styleable>
+
 </resources>

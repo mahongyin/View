@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="android.signin.com.myapplication.MainActivity">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+     <Button
+         android:id="@+id/one"
+         android:text="第一天"
+         android:layout_width="match_parent"
+         android:layout_weight="1"
+         android:layout_height="wrap_content" />
+     <Button
+         android:id="@+id/two"
+         android:text="第二天"
+         android:layout_width="match_parent"
+         android:layout_weight="1"
+         android:layout_height="wrap_content" />
+     <Button
+         android:text="第三天"
+         android:id="@+id/three"
+         android:layout_width="match_parent"
+         android:layout_weight="1"
+         android:layout_height="wrap_content" />
+ </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="第四天"
+            android:id="@+id/four"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="第五天"
+            android:id="@+id/five"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="第六天"
+            android:id="@+id/six"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="第七天"
+            android:id="@+id/seven"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/add"
+        android:text="签到加一天"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/clear"
+        android:text="清除"
+        android:layout_height="wrap_content" />
+    <android.signin.com.myapplication.view.Signin
+        android:id="@+id/sigin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/et"
+        android:layout_height="100dp" />
+</LinearLayout>
