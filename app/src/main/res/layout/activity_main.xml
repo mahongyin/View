@@ -99,6 +99,33 @@
             android:layout_marginTop="16dp" />
 
     </RelativeLayout>
+    <Button
+        android:id="@+id/btn_change_to_icon_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeToIcon1"
+        android:text="change_to_icon_1"/>
+
+    <Button
+        android:id="@+id/btn_change_to_icon_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeToIcon2"
+        android:text="change_to_icon_2"/>
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="reset"
+        android:text="reset"/>
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="bottom|center"
+        android:layout_weight="1"/>
 
     <com.mhy.view.CustomView
         android:layout_width="match_parent"
