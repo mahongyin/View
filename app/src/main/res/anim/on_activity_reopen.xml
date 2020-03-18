@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:duration="500">
+    <!--当被遮住的界面重新回到平面的动画 从屏幕的左边往屏幕移动(右边),直至重新遮住整个屏幕-->
+    <translate android:fromXDelta="-100%p" android:toXDelta="0%p"/>
+</set>

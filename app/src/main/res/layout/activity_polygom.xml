@@ -9,9 +9,9 @@
         android:id="@+id/pv_polygon_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:areaColor="@android:color/holo_blue_light"
-        app:edgeColor="@android:color/black"
-        app:edgeCount="6"
-        app:loopCount="4"
-        app:textColor="@android:color/black" />
+        app:pareaColor="@android:color/holo_blue_light"
+        app:pedgeColor="@android:color/black"
+        app:pedgeCount="6"
+        app:ploopCount="4"
+        app:ptextColor="@android:color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:duration="500">
+    <!--当界面被遮住的动画 从界面往左边移动,直至消失在屏幕的左边-->
+    <translate android:fromXDelta="0%p" android:toXDelta="-100%p"/>
+</set>

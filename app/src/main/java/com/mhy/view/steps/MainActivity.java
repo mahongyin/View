@@ -1,14 +1,19 @@
 package com.mhy.view.steps;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mhy.view.R;
+import com.mhy.view.paypass.PayPassDialog;
+import com.mhy.view.paypass.PayPassView;
 import com.mhy.view.utils.DateUtil;
 
 import java.text.ParseException;
@@ -16,7 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements StepsView.MyViewClick {
     StepsView stepsView;
@@ -27,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
     private List<Integer> signinlist = new ArrayList<>();
     private List<Integer> signinStates = new ArrayList<>();
     int day = -1;//今天在一周的角标
-
+Activity context;
     String[] week = {"一", "二", "三", "四", "五", "六", "日"};
     int showNum = 5;////VIP 1.2倍 SVIP 2倍  ADD 根据身份 区分
 
@@ -35,9 +42,10 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context=this;
         //真被虚假数据
         signinlist.add(1);//周一 0未签到  1已签到
-        signinlist.add(1);
+        signinlist.add(0);
         signinlist.add(1);
         signinlist.add(0);//假如今天周四
         signinlist.add(0);
@@ -170,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
             //补签
             if (postion < day) { //补签
                 //未签 补签
-                if (/*"可以补签"*/true) {
+                if (/*"可以补签"*/false) {
                     //今或之前 后面人日子还没到
                     Toast.makeText(MainActivity.this, "补签成功", Toast.LENGTH_SHORT).show();
                     signinlist.set(postion, 1);//更新数据
@@ -178,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
                     //更新view
                 } else {
                     //开会员
+                    payDialog();//顺便弹个窗
                 }
             }
             if (day == postion) {//签到
@@ -188,8 +197,78 @@ public class MainActivity extends AppCompatActivity implements StepsView.MyViewC
             }
             if (postion > day) {//今天之后
                 Toast.makeText(MainActivity.this, "记得明天来签到哦", Toast.LENGTH_SHORT).show();
+
             }
         }
+    }
+
+    /**
+     * 1 默认方式
+     */
+    PayPassDialog dialogPay;
+
+    private void payDialog() {
+        dialogPay = new PayPassDialog(this);
+        dialogPay.getPayViewPass()
+                .setPayClickListener(new PayPassView.OnPayClickListener() {
+                    @Override
+                    public void onPassFinish(String passContent) {
+                        dialogPay.dismiss();
+                        //6位 输入完成回调
+//                        showToast("输入完成回调"+passContent);
+                      //支付成功需关闭
+                    }
+
+                    @Override
+                    public void onPayClose() {
+                        dialogPay.dismiss();
+                        //关闭回调
+                    }
+
+                    @Override
+                    public void onPayForget() {
+                        dialogPay.dismiss();
+                        //点击忘记密码回调
+                        //showToast("忘记密码回调");
+                    }
+                });
+    }
+
+    /**
+     * 2 自定义方式
+     */
+    private void payDialog2() {
+        final PayPassDialog dialog = new PayPassDialog(this, R.style.dialog_pay_theme);
+        //弹框自定义配置
+        dialog.setAlertDialog(false)
+                .setWindowSize(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.4f)
+                .setOutColse(false)
+                .setGravity(R.style.dialogOpenAnimation, Gravity.BOTTOM);
+        //组合控件自定义配置
+        PayPassView payView = dialog.getPayViewPass();
+        payView.setForgetText("忘记支付密码?");
+        payView.setForgetColor(getResources().getColor(R.color.colorAccent));
+        payView.setForgetSize(16);
+        payView.setPayClickListener(new PayPassView.OnPayClickListener() {
+            @Override
+            public void onPassFinish(String passContent) {
+                //6位输入完成回调
+                //showToast("输入完成回调");
+            }
+
+            @Override
+            public void onPayClose() {
+                dialog.dismiss();
+                //关闭回调
+            }
+
+            @Override
+            public void onPayForget() {
+                dialog.dismiss();
+                //忘记密码回调
+               // showToast("忘记密码回调");
+            }
+        });
     }
 
 }

@@ -7,11 +7,11 @@
     </declare-styleable>
 
     <declare-styleable name="Polygon">
-        <attr name="textColor" format="color" />
-        <attr name="edgeColor" format="color" />
-        <attr name="areaColor" format="color" />
-        <attr name="loopCount" format="integer" />
-        <attr name="edgeCount" format="integer" />
+        <attr name="ptextColor" format="color" />
+        <attr name="pedgeColor" format="color" />
+        <attr name="pareaColor" format="color" />
+        <attr name="ploopCount" format="integer" />
+        <attr name="pedgeCount" format="integer" />
     </declare-styleable>
 
 
@@ -80,4 +80,84 @@
 
     </declare-styleable>
 
+    <declare-styleable name="LockView">
+        <!-- 九宫格数量 -->
+        <attr name="pointCount" format="integer"/>
+        <!--是否在最后一个宫格显示连线-->
+        <attr name="showInLastCircle" format="boolean"/>
+        <!--线的宽度-->
+        <attr name="lineStrokeWidth" format="integer"/>
+        <!--圆形环的的宽度-->
+        <attr name="circleStrokeWidth" format="integer"/>
+        <!--连线顶端颜色-->
+        <attr name="topLineColor" format="color"/>
+        <!--连线的颜色-->
+        <attr name="lineColor" format="color"/>
+        <!--选中的宫格内点的颜色-->
+        <attr name="selectCriclePointColor" format="color"/>
+        <!--普通宫格内点的颜色-->
+        <attr name="normalCriclePointColor" format="color"/>
+        <!--普通宫格环的颜色-->
+        <attr name="normalCricleColor" format="color"/>
+        <!--选中宫格环的颜色-->
+        <attr name="selectCricleColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="RandonView">
+        <attr name="rtext" format="string" />
+        <attr name="rtextColor"  format="color"/>
+        <attr name="rtextSize"  format="integer"/>
+        <attr name="rbgColor" format="color"/>
+    </declare-styleable>
+    <!--多边形图片-->
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+        <enum name="polygon" value="2" />
+    </attr>
+    <declare-styleable name="MultiImageView">
+        <attr name="type" />
+        <attr name="miv_border_width" format="dimension" />
+        <attr name="miv_border_color" format="color" />
+        <attr name="miv_border_overlay" format="boolean" />
+        <attr name="miv_fill_color" format="color" />
+        <attr name="miv_corner_radius" format="dimension" />
+        <attr name="miv_sides" format="integer" />
+        <attr name="miv_rotate_angle" format="float" />
+    </declare-styleable>
+
+    <!--自定义倾斜45°的TextView的自定义属性-->
+    <declare-styleable name="SlantedTextView">
+        <!--倾斜文字角度-->
+        <attr name="slantedDegree" format="integer" />
+        <!--倾斜背景颜色-->
+        <attr name="slantedBackgroundColor" format="color" />
+        <!--倾斜文字颜色-->
+        <attr name="slantedTextColor" format="color" />
+        <!--倾斜文字大小-->
+        <attr name="slantedTextSize" format="dimension" />
+        <!--倾斜文字内容-->
+        <attr name="slantedText" format="string" />
+        <!--倾斜背景 边长距离-->
+        <attr name="slantedLength" format="dimension" />
+        <!--倾斜模式-->
+        <attr name="slantedMode" format="enum">
+            <!--左上角倾斜模式-->
+            <enum name="left" value="0" />
+            <!--右上角倾斜模式-->
+            <enum name="right" value="1" />
+            <!--左下角倾斜模式-->
+            <enum name="left_bottom" value="2" />
+            <!--右下角倾斜模式-->
+            <enum name="right_bottom" value="3" />
+            <!--左上角倾斜三角形模式-->
+            <enum name="left_triangle" value="4" />
+            <!--右上角倾斜三角形模式-->
+            <enum name="right_triangle" value="5" />
+            <!--左下角倾斜三角形模式-->
+            <enum name="left_bottom_triangle" value="6" />
+            <!--右下角倾斜三角形模式-->
+            <enum name="right_bottom_triangle" value="7" />
+        </attr>
+    </declare-styleable>
 </resources>

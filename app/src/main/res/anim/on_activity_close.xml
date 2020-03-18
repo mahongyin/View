@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:duration="500">
+    <!--当界面被关闭的动画 从屏幕往屏幕右边移动,直至消失在界面右边-->
+    <translate android:fromXDelta="0%p" android:toXDelta="100%p"/>
+</set>

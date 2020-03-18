@@ -76,11 +76,11 @@ public class PolygonView extends View {
     public void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Polygon);
         initPaint();
-        setTextColor(typedArray.getColor(R.styleable.Polygon_textColor, Color.BLACK));
-        setLoopCount(typedArray.getInteger(R.styleable.Polygon_loopCount, 0));
-        setEageCount(typedArray.getInteger(R.styleable.Polygon_edgeCount, 0));
-        setAreaColor(typedArray.getColor(R.styleable.Polygon_areaColor, Color.BLUE));
-        setEageColor(typedArray.getColor(R.styleable.Polygon_edgeColor, Color.GRAY));
+        setTextColor(typedArray.getColor(R.styleable.Polygon_ptextColor, Color.BLACK));
+        setLoopCount(typedArray.getInteger(R.styleable.Polygon_ploopCount, 0));
+        setEageCount(typedArray.getInteger(R.styleable.Polygon_pedgeCount, 0));
+        setAreaColor(typedArray.getColor(R.styleable.Polygon_pareaColor, Color.BLUE));
+        setEageColor(typedArray.getColor(R.styleable.Polygon_pedgeColor, Color.GRAY));
         typedArray.recycle();
     }
 
