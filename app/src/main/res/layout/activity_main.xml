@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".steps.MainActivity"
     android:gravity="center_horizontal"
+    android:fitsSystemWindows="false"
     android:orientation="vertical"
 >
 

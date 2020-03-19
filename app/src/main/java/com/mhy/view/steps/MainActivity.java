@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mhy.view.R;
@@ -41,6 +43,7 @@ Activity context;String changeTo;
     String[] week = {"一", "二", "三", "四", "五", "六", "日"};
     int showNum = 5;////VIP 1.2倍 SVIP 2倍  ADD 根据身份 区分
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ Activity context;String changeTo;
 
         initView();
 
-        
+
         //改变 桌面显示图
         TextView tvInfo = (TextView) findViewById(R.id.tv_info);
         try {
