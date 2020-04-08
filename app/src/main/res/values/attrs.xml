@@ -160,4 +160,13 @@
             <enum name="right_bottom_triangle" value="7" />
         </attr>
     </declare-styleable>
+
+
+<!--在values建一个attrs.xml-->
+
+        <declare-styleable name="MyCircleView">
+            <attr name="circlr_bound_width" format="dimension"></attr>
+            <attr name="circlr_bound_color" format="color"></attr>
+        </declare-styleable>
+
 </resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+
+    <com.rockerlibrary.view.MyRockerView
+        android:id="@+id/rockerView_left"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        app:areaBackground="@drawable/default_area_bg"
+        app:rockerBackground="@drawable/default_rocker_bg"
+        app:rockerRadius="30dp" />
+
+    <TextView
+        android:id="@+id/log_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rockerView_left" />
+
+    <TextView
+        android:id="@+id/tip_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/log_left"
+        android:text="支持8个方向的摇杆\n自定义Shape" />
+
+    <com.rockerlibrary.view.MyRockerView
+        android:id="@+id/rockerView_right"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:areaBackground="@mipmap/view_big"
+        app:rockerBackground="@mipmap/view_small"
+        app:rockerRadius="30dp" />
+
+    <TextView
+        android:id="@+id/log_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rockerView_left"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/tip_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/log_right"
+        android:layout_alignParentRight="true"
+        android:text="获取到摇动角度（可自定义方向）\n自定义图片" />
+
+    <com.rockerlibrary.view.MyRockerView
+        android:id="@+id/rockerView_center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        app:areaBackground="#FF333333"
+        app:rockerBackground="#FF987654"
+        app:rockerRadius="15dp" />
+
+    <TextView
+        android:id="@+id/tip_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rockerView_center"
+        android:text="自定义色值" />
+</RelativeLayout>

@@ -11,7 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/rockerLibrary" />
             <option value="$PROJECT_DIR$/siginin" />
+            <option value="$PROJECT_DIR$/viewLibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

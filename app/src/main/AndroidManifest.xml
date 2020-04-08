@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/FlagTheme">
 
-        <activity android:name=".polygon.PolyGomActivity"></activity>
+        <activity android:name=".polygon.PolyGomActivity" />
         <activity android:name=".BarActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +18,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".rocker.MainActivity"
+            android:screenOrientation="sensor"
+            android:configChanges="keyboardHidden|orientation">
+<!--横屏显示设置：android:screenOrientation="lanscape"
+竖屏显示设置：android:screenOrientation="portrait"
+自适应切换: android:screenOrientation="sensor"
+拦截横竖屏切换 需要的配置文件：onConfigurationChanged
+Activity每次横竖屏切换都会重新调用onPause->onStop-> onDestory->onCreate->onStart->onResume
+（为此内容和数据要保存和读取，否则转屏之前的内容就会消失了）
+
+很多时候这样的结果让程序繁琐，为此Android提供了在manifest中设置android:configChanges属性，
+从而让Activity不延续上述的重建流程；
+
+方式一）在Android工程的Mainfest.xml中配置Activity：android:configChanges="keyboardHidden|orientation ，
+横竖屏切换之后就不会去执行OnCreat函数了，而是会去调用onConfigurationChanged（）这样就能控制横竖屏的切换了。
+
+方式二）用户可以在Activity或View的：onConfigurationChanged(Configurationnew   Config)  ，
+函数中获取当前横竖屏参数。至于其调用顺序跟touch时间的传递顺序相似，不过他没有消费事件的概念，
+会顺次调用到每一个onConfigurationChanged函数。-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".steps.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

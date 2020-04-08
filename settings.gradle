@@ -1,2 +1,4 @@
 rootProject.name='View'
 include ':app',':siginin'
+include ':rockerLibrary'
+include ':viewLibrary'
