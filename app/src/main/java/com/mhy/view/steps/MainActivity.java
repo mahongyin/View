@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mhy.view.R;
@@ -21,14 +22,12 @@ import com.mhy.view.paypass.PayPassDialog;
 import com.mhy.view.paypass.PayPassView;
 import com.mhy.view.utils.DateUtil;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static com.mhy.view.steps.StepBean.STEP_COMPLETED;
 
 public class MainActivity extends AppCompatActivity implements StepsView.MyViewClick {
     StepsView stepsView;
@@ -46,14 +45,27 @@ Activity context;String changeTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        Date data=new Date();
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(data);
+        int i=calendar.get(Calendar.DAY_OF_WEEK);
+//  全页灰
+        if (i==0){//周日
+        Paint mPaint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        mPaint.setColorFilter(new ColorMatrixColorFilter(cm));
+        getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, mPaint);}
+//  全页灰      Application.ActivityLifecycleCallbacks
         setContentView(R.layout.activity_main);
         context=this;
         //真被虚假数据
         signinlist.add(1);//周一 0未签到  1已签到
         signinlist.add(0);
-        signinlist.add(1);
-        signinlist.add(0);//假如今天周四
+        signinlist.add(0);
+        signinlist.add(0);
         signinlist.add(0);
         signinlist.add(0);
         signinlist.add(0);
@@ -70,7 +82,7 @@ Activity context;String changeTo;
             e.printStackTrace();
         }
     }
-
+    //改变 桌面显示图
     public void changeToIcon1(View v) {
         changeTo = getClass().getName() + "1";
     }
@@ -164,7 +176,7 @@ Activity context;String changeTo;
                 signinStates.add(signinlist.get(i));
             } else if (i == day) {
                 // 今 如果未签0》-1当前》显示签到
-                signinStates.add(signinlist.get(i) == 0 ? StepBean.STEP_CURRENT : StepBean.STEP_COMPLETED);
+                signinStates.add(signinlist.get(i) == 0 ? StepBean.STEP_CURRENT : STEP_COMPLETED);
             } else if (i > day) {
                 //今天之后 2
                 signinStates.add(StepBean.STEP_TODO);
@@ -174,7 +186,7 @@ Activity context;String changeTo;
                 case StepBean.STEP_UNDO://0 未
                     upText = "补签";
                     break;
-                case StepBean.STEP_COMPLETED://1已签
+                case STEP_COMPLETED://1已签
 //                        //今天前已签的
                     upText = "+" + showNum;//5 6 10
                     if (is4LinkSigin() && i == 3) {//周四翻倍 前提连续签到
@@ -218,7 +230,7 @@ Activity context;String changeTo;
     @Override
     public void onViewClick(int postion) {
         //如果签到过了就不给点击事件了
-        if (signinlist.get(postion) == StepBean.STEP_COMPLETED) {//已签到状态标志1
+        if (signinlist.get(postion) == STEP_COMPLETED) {//已签到状态标志1
             Toast.makeText(MainActivity.this, "不可重复签到", Toast.LENGTH_SHORT).show();
         } else {//下面是没签到的
             Log.e("点击", day + "day天postion" + postion);
@@ -228,18 +240,18 @@ Activity context;String changeTo;
                 if (/*"可以补签"*/false) {
                     //今或之前 后面人日子还没到
                     Toast.makeText(MainActivity.this, "补签成功", Toast.LENGTH_SHORT).show();
-                    signinlist.set(postion, 1);//更新数据
+                    signinlist.set(postion, STEP_COMPLETED);//更新数据
                     setView(5);//更新view
                     //更新view
                 } else {
-                    //开会员
+                    //开会员提示
                     payDialog();//顺便弹个窗
                 }
             }
             if (day == postion) {//签到
                 //当天签到
                 Toast.makeText(MainActivity.this, "签到成功", Toast.LENGTH_SHORT).show();
-                signinlist.set(postion, 1);//更新数据
+                signinlist.set(postion, STEP_COMPLETED);//更新数据
                 setView(5);//更新view
             }
             if (postion > day) {//今天之后

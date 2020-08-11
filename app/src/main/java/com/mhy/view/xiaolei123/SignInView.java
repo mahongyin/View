@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * Created by xiaolei on 2017/11/6.
- * CopyBy https://www.jianshu.com/p/9707821281a8
+ * CopyBy https://www.jianshu.com/p/9707821281a8  签到足迹控件S
  */
 
 public class SignInView extends View {
