@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".steps.MainActivity"
-    android:gravity="center_horizontal"
-    android:fitsSystemWindows="false"
-    android:orientation="vertical"
->
+    android:fitsSystemWindows="true"
 
+>
+    <LinearLayout
+        android:paddingTop="25dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
     <com.mhy.view.xiaolei123.ContextTitle
         android:id="@+id/app_title"
         android:layout_width="match_parent"
@@ -100,7 +104,19 @@
             android:layout_marginTop="16dp" />
 
     </RelativeLayout>
-    <Button
+        <!--动态设置数据-->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/ll_audit_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <Button
         android:id="@+id/btn_change_to_icon_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,14 +140,14 @@
     <TextView
         android:id="@+id/tv_info"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:gravity="bottom|center"
-        android:layout_weight="1"/>
+        />
 
     <com.mhy.view.CustomView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+
         app:customColor="@color/black"
         app:customText="xml里设置自定义属性" />
 
@@ -144,4 +160,5 @@
     <com.mhy.view.xiaolei123.MultiElementProgress
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

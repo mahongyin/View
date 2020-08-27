@@ -3,6 +3,8 @@ package com.mhy.view.textview;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,12 +21,14 @@ import com.mhy.view.R;
 public class MainActivity extends AppCompatActivity {
     //全局变量
     private MyCircleView my_view;
+    BorderTextView borderTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycircle);
         //找控件
         my_view = (MyCircleView) findViewById(R.id.my_view);
+        borderTextView = findViewById(R.id.bordertv);
     }
     public void onClick(View view){
         my_view.setColor(Color.BLUE);
@@ -37,5 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void pauseOrStart(View view){
         my_view.pauseOrStart();
+        borderTextView.setBorderCorlor(getResources().getColor(R.color.black));
     }
 }

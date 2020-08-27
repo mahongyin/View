@@ -81,7 +81,28 @@ Activity context;String changeTo;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+   /***********************进度**************************/
+    //绑定布局
+    LinearLayout content = findViewById(R.id.ll_audit_content);
+    //设置数据及状态
+        content.addView(createView(5, true, true, true, false, "提交行程"));
+        content.addView(createView(5, true, true, false, false, "支付费用"));
+        content.addView(createView(5, true, true, false, false, "乘车出行"));
+        content.addView(createView(5, false, false, false, true, "支付尾款"));
+}
+    //初始化设置数据的方法
+    public AuditProgressView createView(int stepCount, boolean isCurrentComplete, boolean isNextComplete, boolean isFirstStep, boolean isLastStep, String text) {
+        AuditProgressView view = new AuditProgressView(this);
+        view.setStepCount(stepCount);
+        view.setIsCurrentComplete(isCurrentComplete);
+        view.setIsNextComplete(isNextComplete);
+        view.setIsFirstStep(isFirstStep);
+        view.setIsLastStep(isLastStep);
+        view.setText(text);
+        return view;
     }
+
+
     //改变 桌面显示图
     public void changeToIcon1(View v) {
         changeTo = getClass().getName() + "1";

@@ -10,62 +10,79 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FlagTheme">
-
-        <activity android:name=".polygon.PolyGomActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-
-        <activity android:name=".rocker.MainActivity" android:label="rocker"
-            android:screenOrientation="sensor"
-            android:configChanges="keyboardHidden|orientation">
-<!--横屏显示设置：android:screenOrientation="lanscape"
-竖屏显示设置：android:screenOrientation="portrait"
-自适应切换: android:screenOrientation="sensor"
-拦截横竖屏切换 需要的配置文件：onConfigurationChanged
-Activity每次横竖屏切换都会重新调用onPause->onStop-> onDestory->onCreate->onStart->onResume
-（为此内容和数据要保存和读取，否则转屏之前的内容就会消失了）
-
-很多时候这样的结果让程序繁琐，为此Android提供了在manifest中设置android:configChanges属性，
-从而让Activity不延续上述的重建流程；
-
-方式一）在Android工程的Mainfest.xml中配置Activity：android:configChanges="keyboardHidden|orientation ，
-横竖屏切换之后就不会去执行OnCreat函数了，而是会去调用onConfigurationChanged（）这样就能控制横竖屏的切换了。
-
-方式二）用户可以在Activity或View的：onConfigurationChanged(Configurationnew   Config)  ，
-函数中获取当前横竖屏参数。至于其调用顺序跟touch时间的传递顺序相似，不过他没有消费事件的概念，
-会顺次调用到每一个onConfigurationChanged函数。-->
+        <activity android:name=".dragView.DragActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".steps.MainActivity" android:label="step">
+        <activity
+            android:name=".wave.WaveActivity"
+            android:label="textview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity-alias
-            android:name=".MainActivity1"
-            android:enabled="false"
-            android:icon="@mipmap/ic_cg_pro"
-            android:label="M1"
-            android:targetActivity=".steps.MainActivity">
+        <activity
+            android:name=".textview.MainActivity"
+            android:label="textview">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity-alias>
+        </activity>
+        <activity
+            android:name=".polygon.PolyGomActivity"
+            android:label="poly">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".rocker.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="rocker"
+            android:screenOrientation="sensor">
+
+            <!--
+            横屏显示设置：android:screenOrientation="lanscape"
+            竖屏显示设置：android:screenOrientation="portrait"
+            自适应切换: android:screenOrientation="sensor"
+            拦截横竖屏切换 需要的配置文件：onConfigurationChanged
+            Activity每次横竖屏切换都会重新调用onPause->onStop-> onDestory->onCreate->onStart->onResume
+            （为此内容和数据要保存和读取，否则转屏之前的内容就会消失了）
+
+            很多时候这样的结果让程序繁琐，为此Android提供了在manifest中设置android:configChanges属性，
+            从而让Activity不延续上述的重建流程；
+
+            方式一）在Android工程的Mainfest.xml中配置Activity：android:configChanges="keyboardHidden|orientation ，
+            横竖屏切换之后就不会去执行OnCreat函数了，而是会去调用onConfigurationChanged（）这样就能控制横竖屏的切换了。
+
+            方式二）用户可以在Activity或View的：onConfigurationChanged(Configurationnew   Config)  ，
+            函数中获取当前横竖屏参数。至于其调用顺序跟touch时间的传递顺序相似，不过他没有消费事件的概念，
+            会顺次调用到每一个onConfigurationChanged函数。
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".steps.MainActivity"
+            android:label="step">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity-alias
             android:name=".MainActivity2"
@@ -74,19 +91,33 @@ Activity每次横竖屏切换都会重新调用onPause->onStop-> onDestory->onCr
             android:label="M2"
             android:targetActivity=".steps.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-        <activity android:name=".BarActivity" android:label="bar">
+        <activity-alias
+            android:name=".MainActivity1"
+            android:enabled="false"
+            android:icon="@mipmap/ic_cg_pro"
+            android:label="M1"
+            android:targetActivity=".steps.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".BarActivity"
+            android:label="bar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

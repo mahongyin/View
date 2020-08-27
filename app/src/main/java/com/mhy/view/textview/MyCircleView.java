@@ -57,6 +57,7 @@ public class MyCircleView extends View {
                     break;
             }
         }
+        typedArray.recycle();//销毁
     }
     public MyCircleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);

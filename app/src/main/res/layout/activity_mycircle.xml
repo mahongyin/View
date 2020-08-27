@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="pauseOrStart"
         android:text="暂定/开始" />
-    <com.example.lx_20170928.MyCircleView
+    <com.mhy.view.textview.MyCircleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/my_view"
@@ -45,4 +45,17 @@
         app:circlr_bound_color="@color/colorAccent"
         app:circlr_bound_width="3dp"
         />
+    <com.mhy.view.textview.BorderTextView
+        android:id="@+id/bordertv"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:strokeColor="@color/c_FE4E45"
+        app:strokeWidth="0.5dp"
+        app:cornerRadius="2dp"
+        app:paddingLR="13dp"
+        app:paddingTB="2dp"
+        android:text="@string/app_name"/>
 </RelativeLayout>
