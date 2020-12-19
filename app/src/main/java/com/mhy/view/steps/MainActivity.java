@@ -123,7 +123,7 @@ Activity context;String changeTo;
         }
         super.onDestroy();
     }
-
+//动态切换 桌面icon   https://www.jianshu.com/p/9c3459a7bae0
     private void changeLauncher(String name) {
         PackageManager pm = getPackageManager();
         //隐藏之前显示的桌面组件

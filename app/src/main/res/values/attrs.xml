@@ -192,4 +192,32 @@
         <!--步骤提示 -->
         <attr name="apv_text" format="string|reference" />
     </declare-styleable>
+
+
+<!--太极-->
+        <declare-styleable name="TaiJiView">
+            <attr name="leftcolor" format="reference|color"/>
+            <attr name="rightcolor" format="reference|color"/>
+            <attr name="animaltime" format="integer"/>
+        </declare-styleable>
+<!--load-->
+    <declare-styleable name="RotateDotView">
+        <!-- 开始颜色 -->
+        <attr name="rdv_start_color" format="color|reference" />
+        <!-- 结束颜色 -->
+        <attr name="rdv_end_color" format="color|reference" />
+        <!-- 圆点数量 -->
+        <attr name="rdv_dot_count" format="integer|dimension" />
+        <!-- 圆点大小 -->
+        <attr name="rdv_dot_radius" format="integer|float|dimension" />
+        <!-- 是否自动开启旋转，默认开启 -->
+        <attr name="rdv_auto_start" format="boolean" />
+        <!-- 每次旋转的角度 -->
+        <attr name="rdv_rotate_angle" format="integer|dimension" />
+        <!-- 点模式，普通模式、缩放模式 -->
+        <attr name="rdv_dot_mode" format="enum">
+            <enum name="normal" value="1" />
+            <enum name="scale" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -83,7 +83,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+<!--动态更换icon-->
         <activity-alias
             android:name=".MainActivity2"
             android:enabled="false"
@@ -108,7 +108,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
+ <!--动态更换icon-->
         <activity
             android:name=".BarActivity"
             android:label="bar">
