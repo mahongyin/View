@@ -1,5 +1,6 @@
+package com.mhy.view.paypass;
+
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.custom.view.R;
+import com.mhy.view.R;
 
 /**
  * Custom Password EditText
