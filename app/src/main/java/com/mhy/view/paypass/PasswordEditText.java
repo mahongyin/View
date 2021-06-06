@@ -157,3 +157,4 @@ public class PasswordEditText extends AppCompatEditText {
         // 获取当前输入位置
         position = text.length();
     }
+}
