@@ -8,11 +8,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.text.InputFilter;
 import android.util.AttributeSet;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
-
 import com.mhy.view.R;
 
 /**
